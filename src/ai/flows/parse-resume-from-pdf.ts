@@ -114,5 +114,22 @@ const parseResumeFromPdfFlow = ai.defineFlow(
 
 // Export a wrapper function to be called from the server-side
 export async function parseResumeFromPdf(input: ParseResumeFromPdfInput): Promise<ParseResumeFromPdfOutput> {
-  return parseResumeFromPdfFlow(input);
+  try {
+    const apiKey = process.env.GOOGLE_GENAI_API_KEY ||
+      process.env.GEMINI_API_KEY ||
+      process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+
+    if (!apiKey) {
+      throw new Error('Resume AI Key Missing: Please set GEMINI_API_KEY in Vercel.');
+    }
+
+    if (!process.env.GOOGLE_GENAI_API_KEY) {
+      process.env.GOOGLE_GENAI_API_KEY = apiKey;
+    }
+
+    return await parseResumeFromPdfFlow(input);
+  } catch (error: any) {
+    console.error('SERVER ACTION ERROR (Resume):', error);
+    throw new Error(error.message || 'Failed to analyze resume');
+  }
 }

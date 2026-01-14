@@ -112,12 +112,14 @@ const parseInvoicePrompt = ai.definePrompt({
 
 export async function parseInvoiceFromPdf(pdfDataUri: string): Promise<ParseInvoiceOutput> {
   try {
-    // Check for either Genkit's default or the user's specific env name
-    const apiKey = process.env.GOOGLE_GENAI_API_KEY || process.env.GEMINI_API_KEY;
+    // Check for any possible naming variation of the API key
+    const apiKey = process.env.GOOGLE_GENAI_API_KEY ||
+      process.env.GEMINI_API_KEY ||
+      process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
     if (!apiKey) {
-      console.error('CRITICAL: AI API Key is missing from environment variables (tried GOOGLE_GENAI_API_KEY and GEMINI_API_KEY).');
-      throw new Error('AI configuration error: API Key missing. Please ensure GEMINI_API_KEY is set in Vercel Environment Variables.');
+      console.error('CRITICAL: AI API Key not found. Please ensure GEMINI_API_KEY is set in Vercel.');
+      throw new Error('AI Key Missing: Please add GEMINI_API_KEY to your Vercel Environment Variables.');
     }
 
     // Force set it for Genkit if it's under a different name
@@ -126,11 +128,10 @@ export async function parseInvoiceFromPdf(pdfDataUri: string): Promise<ParseInvo
     }
 
     const { output } = await parseInvoicePrompt({ pdfDataUri });
-    if (!output) throw new Error('AI failed to return structured data');
+    if (!output) throw new Error('AI response was empty');
     return output;
   } catch (error: any) {
-    console.error('PDF Parsing Error:', error);
-    // Be careful not to leak the raw error in some cases, but here it helps debug
-    throw new Error(error.message || 'Failed to parse document');
+    console.error('SERVER ACTION ERROR (Invoice):', error);
+    throw new Error(error.message || 'Server-side parsing failed');
   }
 }
