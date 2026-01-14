@@ -63,9 +63,13 @@ export default function BusinessPage() {
             const analysis = await parseInvoiceFromPdf(dataUri)
             form.reset(analysis)
             toast({ title: "Sync Complete", description: "All 13 columns and summary data extracted." })
-        } catch (error) {
+        } catch (error: any) {
             console.error(error)
-            toast({ variant: "destructive", title: "Error", description: "Use manual panels to edit details." })
+            toast({
+                variant: "destructive",
+                title: "Processing Failed",
+                description: error.message || "Failed to analyze document. Please check your API configuration or try a smaller file."
+            })
         } finally {
             setIsAnalyzing(false)
         }
