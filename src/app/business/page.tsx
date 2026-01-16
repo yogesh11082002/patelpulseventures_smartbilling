@@ -176,8 +176,8 @@ export default function BusinessPage() {
                     </Button>
                 </div>
 
-                <div className="flex-1 bg-[#020617] overflow-y-auto p-12 scrollbar-hide flex flex-col items-center">
-                    <div className="w-[850px] p-6 bg-slate-900/20 rounded-[4rem] border border-slate-800 shadow-2xl relative">
+                <div className="flex-1 bg-[#020617] overflow-hidden relative flex items-center justify-center p-4">
+                    <div className="w-[850px] p-6 bg-slate-900/20 rounded-[4rem] border border-slate-800 shadow-2xl relative transition-transform duration-300 origin-center scale-[0.6] lg:scale-[0.65] xl:scale-[0.8] 2xl:scale-100">
                         <div className="bg-white" ref={invoiceRef}>
                             <AsianPaintsInvoiceTemplate data={form.watch()} />
                         </div>
