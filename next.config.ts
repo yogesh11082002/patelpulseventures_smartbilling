@@ -35,6 +35,7 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: '4mb',
     },
+    serverComponentsExternalPackages: ['genkit', '@genkit-ai/google-genai'],
   }
 };
 

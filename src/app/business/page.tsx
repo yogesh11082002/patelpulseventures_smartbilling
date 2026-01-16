@@ -100,7 +100,7 @@ export default function BusinessPage() {
         <div className="flex flex-col min-h-screen bg-[#0f172a] text-slate-100">
             <SiteHeader />
             <main className="flex-1 flex overflow-hidden">
-                <div className="w-[450px] border-r border-slate-800 bg-[#020617] overflow-y-auto p-6 space-y-8 scrollbar-hide">
+                <div className="w-[600px] border-r border-slate-800 bg-[#020617] overflow-y-auto p-6 space-y-8 scrollbar-hide">
                     <div className="space-y-1">
                         <h2 className="text-xl font-black uppercase tracking-tighter flex items-center gap-2">
                             <Receipt className="w-6 h-6 text-primary" />
@@ -152,16 +152,16 @@ export default function BusinessPage() {
                                             <Label className="text-[9px] text-slate-500 font-black italic">ITEM #{index + 1}</Label>
                                             <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => remove(index)}><Trash2 className="w-3" /></Button>
                                         </div>
-                                        <Input {...form.register(`items.${index}.description` as any)} placeholder="Description" className="bg-slate-900 border-none h-8 text-[11px] font-bold" />
+                                        <Input {...form.register(`items.${index}.description` as any)} placeholder="Description" className="bg-slate-900 border-none h-8 text-[11px] font-bold text-white" />
                                         <div className="grid grid-cols-2 gap-2">
-                                            <Input {...form.register(`items.${index}.materialHsn` as any)} placeholder="HSN" className="bg-slate-900 border-none h-8 text-[11px] font-mono" />
-                                            <Input {...form.register(`items.${index}.volume` as any)} placeholder="Volume (Kg/Lt/M)" className="bg-slate-900 border-none h-8 text-[11px]" />
+                                            <Input {...form.register(`items.${index}.materialHsn` as any)} placeholder="HSN" className="bg-slate-900 border-none h-8 text-[11px] font-mono text-white" />
+                                            <Input {...form.register(`items.${index}.volume` as any)} placeholder="Volume (Kg/Lt/M)" className="bg-slate-900 border-none h-8 text-[11px] text-white" />
                                         </div>
                                         <div className="grid grid-cols-4 gap-1">
-                                            <Input type="number" {...form.register(`items.${index}.qty` as any)} placeholder="Qty" className="bg-slate-900 border-none h-7 text-[10px]" />
-                                            <Input type="number" {...form.register(`items.${index}.rate` as any)} placeholder="Rate" className="bg-slate-900 border-none h-7 text-[10px]" />
-                                            <Input type="number" {...form.register(`items.${index}.taxableAmount` as any)} placeholder="Taxable" className="bg-slate-900 border-none h-7 text-[10px]" />
-                                            <Input type="number" {...form.register(`items.${index}.totalAmount` as any)} placeholder="Total" className="bg-slate-900 border-none h-7 text-[10px]" />
+                                            <Input type="number" {...form.register(`items.${index}.qty` as any)} placeholder="Qty" className="bg-slate-900 border-none h-7 text-[10px] text-white" />
+                                            <Input type="number" {...form.register(`items.${index}.rate` as any)} placeholder="Rate" className="bg-slate-900 border-none h-7 text-[10px] text-white" />
+                                            <Input type="number" {...form.register(`items.${index}.taxableAmount` as any)} placeholder="Taxable" className="bg-slate-900 border-none h-7 text-[10px] text-white" />
+                                            <Input type="number" {...form.register(`items.${index}.totalAmount` as any)} placeholder="Total" className="bg-slate-900 border-none h-7 text-[10px] text-white" />
                                         </div>
                                     </Card>
                                 ))}
